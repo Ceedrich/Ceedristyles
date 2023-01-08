@@ -1,0 +1,16 @@
+@use "./abstracts/variables" as *;
+@use "./abstracts/mixins" as m;
+.row {
+    display: grid;
+    grid-template-columns: repeat($grid-columns, 1fr);
+}
+
+@each $bp-key in $breakpoint-keys {
+    @include m.media($bp-key) {
+        @for $i from 1 through $grid-columns {
+            .col.#{$bp-key}#{$i} {
+                grid-column: auto / span $i;
+            }
+        }
+    }
+}

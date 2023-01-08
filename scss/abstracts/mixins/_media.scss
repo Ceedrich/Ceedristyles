@@ -1,0 +1,16 @@
+@use "../variables" as *;
+
+@mixin media($query) {
+    @if map-has-key($breakpoints, $query) {
+        $min-width: map-get($breakpoints, $query);
+        @if $min-width == 0 {
+            @content;
+        } @else {
+            @media (min-width: $min-width) {
+                @content;
+            }
+        }
+    } @else {
+        @warn "Bad Query";
+    }
+}
