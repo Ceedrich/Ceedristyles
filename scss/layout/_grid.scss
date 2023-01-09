@@ -1,8 +1,9 @@
-@use "./abstracts/variables" as *;
-@use "./abstracts/mixins" as m;
+@use "../variables" as *;
+@use "../abstracts/mixins" as m;
 .row {
     display: grid;
     grid-template-columns: repeat($grid-columns, 1fr);
+    gap: $grid-gap;
 }
 
 @each $bp-key in $breakpoint-keys {

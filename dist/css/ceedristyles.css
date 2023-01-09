@@ -1,54 +1,13 @@
+/*
+* Overwrite defaults in this way:
+* @use "./variables" with (
+*   $grid-columns: 8
+* );
+*/
 .row {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-}
-
-.col.s1 {
-  grid-column: auto/span 1;
-}
-
-.col.s2 {
-  grid-column: auto/span 2;
-}
-
-.col.s3 {
-  grid-column: auto/span 3;
-}
-
-.col.s4 {
-  grid-column: auto/span 4;
-}
-
-.col.s5 {
-  grid-column: auto/span 5;
-}
-
-.col.s6 {
-  grid-column: auto/span 6;
-}
-
-.col.s7 {
-  grid-column: auto/span 7;
-}
-
-.col.s8 {
-  grid-column: auto/span 8;
-}
-
-.col.s9 {
-  grid-column: auto/span 9;
-}
-
-.col.s10 {
-  grid-column: auto/span 10;
-}
-
-.col.s11 {
-  grid-column: auto/span 11;
-}
-
-.col.s12 {
-  grid-column: auto/span 12;
+  gap: 0.5em;
 }
 
 @media (min-width: 40em) {

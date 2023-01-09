@@ -1,16 +1,36 @@
-@use "../variables" as *;
+@use "../../variables" as *;
+@use "../functions/stringjoin" as *;
+@use "sass:list";
 
-@mixin media($query) {
+@function _getQueryRule($query) {
     @if map-has-key($breakpoints, $query) {
         $min-width: map-get($breakpoints, $query);
         @if $min-width == 0 {
-            @content;
+            @return null;
         } @else {
-            @media (min-width: $min-width) {
-                @content;
-            }
+            @return "(min-width: #{$min-width})";
         }
     } @else {
-        @warn "Bad Query";
+        @warn "#{$query} is a Bad Query";
+        @return null;
+    }
+}
+
+@function _getQueryRules($queries) {
+    $queryRules: ();
+    @each $query in $queries {
+        $queryRules: list.append($queryRules, "#{_getQueryRule($query)}");
+    }
+    $queryRules: stringjoin($queryRules, " and ");
+    @return $queryRules;
+}
+
+@mixin media($queries...) {
+    $queryRules: _getQueryRules($queries);
+    @debug $queryRules;
+    @if $queryRules {
+        @media #{$queryRules} {
+            @content;
+        }
     }
 }

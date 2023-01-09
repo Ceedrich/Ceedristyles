@@ -1,0 +1,19 @@
+@function stringjoin($list, $separator: ",") {
+    @if type-of($list) != list {
+        @error "#{$list} is not of type list";
+    }
+    $string: "";
+    @each $item in $list {
+        @if $item != "" {
+            @if $string == "" {
+                $string: "#{$item}";
+            } @else {
+                $string: str-insert($string, "#{$separator}#{$item}", -1);
+            }
+        }
+    }
+    @if $string == "" {
+        @return null;
+    }
+    @return $string;
+}
