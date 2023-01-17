@@ -1,0 +1,13 @@
+@use "sass:color";
+@use "sass:math";
+
+@function get_contrast_ratio($color1, $color2) {
+    $b1: color.blackness($color1);
+    $b2: color.blackness($color2);
+
+    @if $b1 > $b2 {
+        @return math.div($b1, $b2);
+    } @else {
+        @return math.div($b2, $b1);
+    }
+}

@@ -1,0 +1,17 @@
+@use "../../variables" as *;
+
+@mixin media-breakpoint($bp) {
+    @if map-has-key($breakpoints, $bp) {
+        $query: map-get($breakpoints, $bp);
+        @if $query == 0 {
+            @content;
+        } @else {
+            @media (min-width: $query) {
+                @content;
+            }
+        }
+    } @else {
+        @warn "Bad Breakpoint key";
+        @content;
+    }
+}

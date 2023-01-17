@@ -1,0 +1,46 @@
+@use "../variables" as *;
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as m;
+
+@mixin button($type: normal) {
+    $bg-color: $button-background-color;
+    @if $type == warn {
+        $bg-color: $button-warn-color;
+    } @else if $type == error {
+        $bg-color: $button-error-color;
+    }
+
+    background-color: $bg-color;
+    color: $button-color;
+    padding: {
+        inline: $button-padding-x;
+        block: $button-padding-y;
+    }
+    border: str-join($button-border, " ");
+    border-radius: $button-border-radius;
+
+    @include m.transition(background-color);
+    @each $state in (hover, active) {
+        &:#{$state} {
+            @include m.color-scheme(dark) {
+                background-color: mix(white, $bg-color, $button-hover-bg-shade-amount);
+            }
+            @include m.color-scheme(light) {
+                background-color: mix(black, $bg-color, $button-hover-bg-shade-amount);
+            }
+        }
+    }
+}
+
+$btn-aliasses: (".btn", ".button", "button", "input[type=submit]");
+
+#{$btn-aliasses} {
+    @include button();
+
+    &.warn {
+        @include button(warn);
+    }
+    &.error {
+        @include button(error);
+    }
+}

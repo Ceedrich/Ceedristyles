@@ -1,0 +1,16 @@
+@use "./str-join" as *;
+
+@function map-to-string($map, $separator: ", ") {
+    @if type-of($map) != "map" {
+        @error "#{map} is not of type map";
+    }
+
+    $string-list: ();
+
+    @each $key, $value in $map {
+        $string-list: append($string-list, str-join(($key, $value), ": "));
+    }
+
+    $str: str-join($string-list, $separator);
+    @return $str;
+}

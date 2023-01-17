@@ -1,0 +1,10 @@
+@use "../variables" as *;
+@use "../abstracts/mixins/media-breakpoint" as *;
+.container {
+    margin: 0 auto;
+    @each $bp in $breakpoint-keys {
+        @include media-breakpoint($bp) {
+            max-width: map-get($container-sizes, $bp);
+        }
+    }
+}

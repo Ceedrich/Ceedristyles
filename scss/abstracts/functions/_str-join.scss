@@ -1,4 +1,4 @@
-@function stringjoin($list, $separator: ",") {
+@function str-join($list, $separator: ",") {
     @if type-of($list) != list {
         @error "#{$list} is not of type list";
     }
@@ -15,5 +15,5 @@
     @if $string == "" {
         @return null;
     }
-    @return $string;
+    @return unquote($string);
 }

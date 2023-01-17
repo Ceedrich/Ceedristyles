@@ -1,38 +1,11 @@
 @use "../../variables" as *;
-@use "../functions/stringjoin" as *;
-@use "sass:list";
+@use "./color-scheme" as *;
+@use "./media-breakpoint" as *;
 
-@function _getQueryRule($query) {
-    @if map-has-key($breakpoints, $query) {
-        $min-width: map-get($breakpoints, $query);
-        @if $min-width == 0 {
-            @return null;
-        } @else {
-            @return "(min-width: #{$min-width})";
-        }
-    } @else {
-        @warn "#{$query} is a Bad Query";
-        @return null;
-    }
-}
-
-@function _getQueryRules($queries) {
-    $queryRules: ();
-    @each $query in $queries {
-        $queryRules: list.append($queryRules, "#{_getQueryRule($query)}");
-    }
-    $queryRules: stringjoin($queryRules, " and ");
-    @return $queryRules;
-}
-
-@mixin media($queries...) {
-    $queryRules: _getQueryRules($queries);
-    @debug $queryRules;
-    @if $queryRules {
-        @media #{$queryRules} {
+@mixin media($breakpoint: s, $color-scheme: dark) {
+    @include color-scheme($color-scheme) {
+        @include media-breakpoint($breakpoint) {
             @content;
         }
-    } @else {
-        @content;
     }
 }

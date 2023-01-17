@@ -1,0 +1,53 @@
+@use "../variables" as *;
+@use "../abstracts/mixins" as m;
+
+.card-grid {
+    display: grid;
+    @each $bp in $breakpoint-keys {
+        @include m.media-breakpoint($bp) {
+            grid-template-columns: repeat(map-get($card-grid-columns, $bp), 1fr);
+        }
+    }
+    justify-items: center;
+}
+
+.card {
+    position: relative;
+    padding: $card-padding;
+    @include m.color-scheme(light) {
+        box-shadow: $card-shadow-light;
+    }
+    @include m.color-scheme(dark) {
+        box-shadow: $card-shadow-dark;
+    }
+    margin: $card-margin;
+    border-radius: $card-border-radius;
+
+    display: flex;
+    flex-direction: column;
+    grid-template-rows: 1fr 1fr auto;
+
+    &__title {
+        font-size: $card-title-font-size;
+    }
+
+    &__body {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 5;
+        overflow-y: hidden;
+        margin-bottom: 1rem;
+    }
+    &__footer {
+        margin-top: auto;
+    }
+
+    &.scale {
+        @include m.transition(scale);
+
+        &:hover {
+            scale: $card-scale-factor;
+        }
+    }
+}

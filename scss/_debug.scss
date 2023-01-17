@@ -1,0 +1,27 @@
+@use "./variables" as *;
+@use "./abstracts/mixins" as m;
+@use "./abstracts/functions/map_to_string" as *;
+
+body::before {
+    position: relative;
+    width: 100%;
+    display: block;
+    text-align: center;
+    white-space: pre-wrap;
+}
+$debug-prefix: "[Debug]:\A";
+
+body::before {
+    @each $scheme in (dark, light) {
+        @each $bp in $breakpoint-keys {
+            @include m.media($bp, $scheme) {
+                $content-map: (
+                    Color-Scheme: $scheme,
+                    Media-Size: $bp,
+                );
+                @debug map-to-string($content-map);
+                content: "#{$debug-prefix}#{map-to-string($content-map, "\A")}";
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+@function create_color_shades($color) {
+    $shades: (
+        100: mix(#fff, $color, 80%),
+        200: mix(#fff, $color, 60%),
+        300: mix(#fff, $color, 40%),
+        400: mix(#fff, $color, 20%),
+        500: $color,
+        600: mix(#000, $color, 20%),
+        700: mix(#000, $color, 40%),
+        800: mix(#000, $color, 60%),
+        900: mix(#000, $color, 80%),
+    );
+    @return $shades;
+}

@@ -1,3 +1,107 @@
+@use "./abstracts/functions/" as *;
+// Typography
+$font-family-sans-serif: Arial, Helvetica, sans-serif !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace !default;
+
+$font-family-body: $font-family-sans-serif !default;
+$font-family-headings: $font-family-sans-serif !default;
+$font-family-code: $font-family-monospace !default;
+
+$font-size-base: 1rem !default;
+$font-size-s: 0.875 * $font-size-base !default;
+$font-size-l: 1.25 * $font-size-base !default;
+
+$font-size-h1: $font-size-base * 2.5 !default;
+$font-size-h2: $font-size-base * 2 !default;
+$font-size-h3: $font-size-base * 1.75 !default;
+$font-size-h4: $font-size-base * 1.5 !default;
+$font-size-h5: $font-size-base * 1.25 !default;
+$font-size-h6: $font-size-base !default;
+
+$font-sizes: (
+    1: $font-size-h1,
+    2: $font-size-h2,
+    3: $font-size-h3,
+    4: $font-size-h4,
+    5: $font-size-h5,
+    6: $font-size-h6,
+) !default;
+
+// Colors
+$blue: #0066b2 !default;
+$red: #ba0021 !default;
+$green: #17b169 !default;
+$purple: #662d91 !default;
+$yellow: #ffd700 !default;
+$pink: #ff00bf !default;
+$orange: #ed9121 !default;
+
+$white: #fff !default;
+$black: #000 !default;
+
+$grays: create_color_shades(mix($black, $white, 50%)) !default;
+$blues: create_color_shades($blue) !default;
+$greens: create_color_shades($green) !default;
+$purples: create_color_shades($purple) !default;
+$yellows: create_color_shades($yellow) !default;
+$pinks: create_color_shades($pink) !default;
+$oranges: create_color_shades($orange) !default;
+
+$colors: (
+    primary: $blue,
+    warn: $yellow,
+    error: $red,
+) !default;
+
+// Shadows
+
+$box-shadow-offset-x: 0.05rem !default;
+$box-shadow-offset-y: 0.05rem !default;
+$box-shadow-blur-radius: 0.5rem !default;
+$box-shadow-spread-radius: 0.02rem !default;
+$box-shadow-dark-color: $white !default;
+$box-shadow-light-color: $black !default;
+
+$box-shadow-dark: $box-shadow-offset-x $box-shadow-offset-y $box-shadow-blur-radius
+    $box-shadow-spread-radius $box-shadow-dark-color !default;
+
+$box-shadow-light: $box-shadow-offset-x $box-shadow-offset-y $box-shadow-blur-radius
+    $box-shadow-spread-radius $box-shadow-light-color !default;
+
+// Body
+
+$body-color-dark: map-get($grays, 100);
+$body-color-light: map-get($grays, 900);
+
+$body-background-color-dark: map-get($grays, 900);
+$body-background-color-light: map-get($grays, 100);
+
+// Transitions
+$transition-duration: 300ms;
+$transition-timing-function: ease;
+
+// Borders
+$border-style: solid !default;
+
+$border-width: 0.0625rem !default;
+$border-widths: (
+    1: 0.0625rem,
+    2: 0.125rem,
+    3: 0.1875rem,
+    4: 0.25rem,
+    5: 0.5rem,
+) !default;
+
+$border-color: transparent !default;
+
+$border-radius: 0.375rem !default;
+$border-radius-s: 0.25rem !default;
+$border-radius-m: 0.375rem !default;
+$border-radius-l: 0.5rem !default;
+$border-radius-xl: 1rem !default;
+$border-radius-pill: 100vmax !default;
+
 // Breakpoints
 $breakpoint-keys: (s, m, l, xl);
 
@@ -13,6 +117,63 @@ $breakpoints: (
     xl: $breakpoint-xl,
 ) !default;
 
+// Container sizes (max)
+$container-sizes: (
+    s: calc(100% - 2rem),
+    m: 35em,
+    l: 55em,
+    xl: 70em,
+) !default;
+
 // Grid
 $grid-columns: 12 !default;
 $grid-gap: 0.5em !default;
+
+// Buttons
+$button-background-color: map-get($colors, primary) !default;
+$button-color: $white !default;
+$button-warn-color: map-get($colors, warn) !default;
+$button-error-color: map-get($colors, error) !default;
+
+$button-padding-x: 1.25em !default;
+$button-padding-y: 1em !default;
+$button-border-width: $border-width !default;
+$button-border-color: $border-color !default;
+$button-border-style: $border-style !default;
+$button-border-radius: $border-radius-pill !default;
+$button-border: (
+    $button-border-style,
+    $button-border-width,
+    $button-border-color
+) !default;
+
+$button-hover-bg-shade-amount: 30% !default;
+$button-hover-border-shade-amount: 30% !default;
+$button-hover-color-shade-amount: 0 !default;
+$button-active-bg-shade-amount: 30% !default;
+$button-active-border-shade-amount: 30% !default;
+$button-active-color-shade-amount: 0 !default;
+
+// Card
+$card-padding: 2em !default;
+$card-margin-x: 0.5rem !default;
+$card-margin-y: 1rem !default;
+$card-margin: $card-margin-x $card-margin-y !default;
+$card-scale-factor: 1.1 !default;
+$card-border-radius: $border-radius-s !default;
+
+$card-title-font-size: $font-size-h2 !default;
+$card-shadow-dark: $box-shadow-dark !default;
+$card-shadow-light: $box-shadow-light !default;
+
+$card-grid-columns-s: 1 !default;
+$card-grid-columns-m: 2 !default;
+$card-grid-columns-l: 3 !default;
+$card-grid-columns-xl: 4 !default;
+
+$card-grid-columns: (
+    s: $card-grid-columns-s,
+    m: $card-grid-columns-m,
+    l: $card-grid-columns-l,
+    xl: $card-grid-columns-xl,
+) !default;

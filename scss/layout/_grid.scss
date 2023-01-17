@@ -7,7 +7,7 @@
 }
 
 @each $bp-key in $breakpoint-keys {
-    @include m.media($bp-key) {
+    @include m.media-breakpoint($bp-key) {
         @for $i from 1 through $grid-columns {
             .col.#{$bp-key}#{$i} {
                 grid-column: auto / span $i;

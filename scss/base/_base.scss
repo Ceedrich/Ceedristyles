@@ -1,0 +1,21 @@
+@use "../variables" as *;
+@use "../abstracts/mixins" as m;
+
+body {
+    font-family: $font-family-body;
+    @include m.color-scheme(dark) {
+        background-color: $body-background-color-dark;
+        color: $body-color-dark;
+    }
+    @include m.color-scheme(light) {
+        background-color: $body-background-color-light;
+        color: $body-color-light;
+    }
+}
+// Headings
+@for $i from 1 to 6 {
+    h#{$i} {
+        font-family: $font-family-headings;
+        font-size: map-get($font-sizes, $i);
+    }
+}
