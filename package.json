@@ -1,6 +1,6 @@
 {
     "name": "ceedristyles",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "",
     "scripts": {
         "delete:dist": "delete dist",
@@ -21,9 +21,7 @@
         "postcss": "^8.4.21",
         "postcss-cli": "^10.1.0",
         "postcss-combine-duplicated-selectors": "^10.0.3",
-        "sass": "^1.57.1"
-    },
-    "dependencies": {
+        "sass": "^1.57.1",
         "cssnano": "^5.1.14",
         "postcss-combine-media-query": "^1.0.1"
     }
